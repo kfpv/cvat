@@ -18,7 +18,7 @@ metadata:
 
 spec:
   description: Interactive object segmentation with Segment-Anything
-  runtime: 'python:3.8'
+  runtime: 'python:3.9'
   handler: main:handler
   eventTimeout: 30s
   env:
@@ -46,6 +46,9 @@ spec:
       # install sam code
         - kind: RUN
           value: pip3 install git+https://github.com/facebookresearch/segment-anything.git
+      # install msgpack (fixes ModuleNotFoundError)
+        - kind: RUN
+          value: pip3 install msgpack
       # download sam weights
         - kind: RUN
           value: curl -O https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
